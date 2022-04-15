@@ -7,16 +7,15 @@ const addNumbers = (strNumbers) =>{
     }else{
         //Check for delimeters - string starting with '//'
         if(strNumbers.includes('//')){
-            delimeterVar=strNumbers.charAt(2);
+            delimeterVar=strNumbers.charAt(2);//getting value of delimeter
             var strNumbersTemp=strNumbers.split('\n');
             strNumbers=strNumbersTemp[1];
-            numbers=strNumbers.split(delimeterVar).map(n=>parseInt(n,10));
          }
         // converting the string array to number array
-         else{
-            const num=strNumbers.replace(';',',');
+         
+            const num=strNumbers.replaceAll(';',',');
             numbers = num.replace(/(\r\n|\n|\r)/gm,',').split(',').map(n=>parseInt(n,10));
-         }
+        
         //Check if the value is number or not
         if(numbers.some(n=>Number.isNaN(n))){
             throw new Error('Not a number');

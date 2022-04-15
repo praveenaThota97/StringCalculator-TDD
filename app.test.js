@@ -17,10 +17,6 @@ describe('addNumbers',()=>{
     it('Should return sum of entered numbers',()=>{
         expect(addNumbers("5,5,5")).toBe(15);
     })
-    //Test-9 - Should return sum of 3 numbers
-    it('Should return sum of entered numbers',()=>{
-        expect(function(){addNumbers("5,5,a");}).toThrow(new Error("Not a number"));
-    })
     //Test-5 - Should add any number of arguments
     it('Should add any number of inputs',()=>{
         expect(addNumbers("5,5,5,5,5,5")).toBe(30);
@@ -31,10 +27,14 @@ describe('addNumbers',()=>{
     })
     //Test-7 - Should allow any delimeters
     it('Should allow delimeters as input',()=>{
-        expect(addNumbers("//;\n1;2")).toBe(3);
+        expect(addNumbers("//-\n1;2")).toBe(3);
     })
     //Test-8 - Should not allow negative numbers to add
     it('Should not allow negative numbers to add',()=>{
         expect(function(){addNumbers("-1,-2,5");}).toThrow(new Error("Negatives not allowed"));
+    })
+    //Test-9 - Should not add if the string contains a charater
+    it('Should not add if the string contains a charater',()=>{
+        expect(function(){addNumbers("5,5,a");}).toThrow(new Error("Not a number"));
     })
 })
