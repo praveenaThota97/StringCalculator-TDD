@@ -1,33 +1,32 @@
-const addNumbers = (...nums) => {
-//   for(var i=0;i<nums.length;i++){
-//       console.log(nums[i]);
-//       if(nums[i]<0){
-//           console.log("Negative are not allowed");
-//       }
-//   }
-var numberArray=[];
-var strArray= Array.from(nums[0]);
- //console.log(strArray);
- for(var i=0;i<strArray.length;i++){
-     try{
-        if(!isNaN(parseInt(strArray[i])) && parseInt(strArray[i])<0){
-            throw new Error ("Negatives not allowed"+strArray[i]);
-            break;
+//Function for adding numbers
+const addNumbers = (strNumbers) =>{
+    var delimeterVar=';',numbers='';//Initialization of variables
+    //Check for emprty string
+    if(strNumbers == ""){
+        return 0;
+    }else{
+        //Check for delimeters - string starting with '//'
+        if(strNumbers.includes('//')){
+            delimeterVar=strNumbers.charAt(2);
+            var strNumbersTemp=strNumbers.split('\n');
+            strNumbers=strNumbersTemp[1];
+            numbers=strNumbers.split(delimeterVar).map(n=>parseInt(n,10));
          }
-         if(!isNaN(parseInt(strArray[i])) && parseInt(strArray[i])>0){
-            numberArray.push(parseInt(strArray[i]));
-            
+        // converting the string array to number array
+         else{
+            const num=strNumbers.replace(';',',');
+            numbers = num.replace(/(\r\n|\n|\r)/gm,',').split(',').map(n=>parseInt(n,10));
          }
-     }finally{
-
-     }
-     
+        //Check if the value is number or not
+        if(numbers.some(n=>Number.isNaN(n))){
+            throw new Error('Not a number');
+        }
+        //Will not allow negative numbers for adding
+        if(numbers.some(n=>n<0)){
+            throw new Error('Negatives not allowed');
+        }
+        return numbers.reduce((total,num)=>total+num,0);// returning the sum
+        }
     
- }
- console.log(numberArray+"numberArray");
-    return numberArray.reduce((total,num)=>total+num,0);
-    
-    
-}; 
-
+};
 module.exports = addNumbers;
