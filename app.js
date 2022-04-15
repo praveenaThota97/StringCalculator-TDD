@@ -12,9 +12,8 @@ const addNumbers = (strNumbers) =>{
             strNumbers=strNumbersTemp[1];
          }
         // converting the string array to number array
-         
-            const num=strNumbers.replaceAll(';',',');
-            numbers = num.replace(/(\r\n|\n|\r)/gm,',').split(',').map(n=>parseInt(n,10));
+        const num=strNumbers.replaceAll(';',',');
+        numbers = num.replace(/(\r\n|\n|\r)/gm,',').split(',').map(n=>parseInt(n,10));
         
         //Check if the value is number or not
         if(numbers.some(n=>Number.isNaN(n))){
